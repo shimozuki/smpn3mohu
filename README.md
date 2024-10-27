@@ -1,114 +1,53 @@
-# Inven BS
+<!--
+**shimozuki/shimozuki** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
-Aplikasi inventaris barang sekolah menggunakan Framework Laravel 10. Aplikasi ini cocok untuk digunakan untuk di sekolah.
+<!-- More info, tips and tricks for making GitHub Profile README can be found in my article at https://towardsdatascience.com/build-a-stunning-readme-for-your-github-profile-9b80434fe5d7 -->
 
-Beberapa CRUD menggunakan modal dan AJAX untuk pengambilan data agar mengurangi penggunaan pindah halaman.
 
-### Prasyarat
 
-Berikut beberapa hal yang perlu diinstal terlebih dahulu:
+<!-- # Hii  <img src="202af01200210c11a68ca2da7ef03321.gif" width="50px"> -->
+<h1 align="center">### Hi there, I'm Shimozuki <img src="202af01200210c11a68ca2da7ef03321.gif" width="50px">
+  
+![readmebox (1)](https://github-production-user-asset-6210df.s3.amazonaws.com/34431847/258598204-a4ad0e76-297d-4387-9322-09d83c233689.svg)</h1>
 
--   Composer (https://getcomposer.org/)
--   PHP ^8.1
--   MySQL
--   XAMPP
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=shimozuki&color=blue)
+![Profile Views](https://komarev.com/ghpvc/?username=shimozuki)
+## I'm a Web and mobile developer from West Nusa Tenggara, Indonesia
+- 🌱 I’m currently learning Laravel & Flutter
+- 🥅 2021 Goals: Contribute more to Open Source projects
+- ⚡ Fun fact: play games
 
-Jika Anda menggunakan XAMPP, untuk PHP dan MySQL sudah menjadi 1 (bundle) di dalam aplikasi XAMPP
+### Connect with me:
 
-### Fitur
+[<img align="left" alt="Ahmad Robbiul Iman | facebook" width="22px" src="https://cdn.cdnlogo.com/logos/f/91/facebook-icon.svg"/>][facebook]
+[<img align="left" alt="Ahmad Robbiul Iman | Instagram" width="22px" src="https://cdn.cdnlogo.com/logos/i/4/instagram.svg"/>][instagram]
 
--   CRUD Data Barang
--   Import/export excel barang
--   Print barang (seluruh/individual)
--   CRUD Data BOS (Bantuan Operasional Sekolah)
--   CRUD Data Ruangan
--   CRUD Data Pengguna
--   Pengaturan Profil
+<br />
 
-### Preview Gambar
+### Languages and Tools:
 
-_Tampilan Login_
-![Image 1](https://i.imgur.com/kD6P7BF.png)
+<img align="left" alt="Pop!_OS" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/ubuntu/ubuntu.png" />
+<img align="left" alt="Visual Studio Code" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/visual-studio-code/visual-studio-code.png" />
+<img align="left" alt="HTML5" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/html/html.png" />
+<img align="left" alt="CSS3" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png" />
+<img align="left" alt="Sass" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/sass/sass.png" />
+<img align="left" alt="Laravel" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/laravel/laravel.png" />
+<img align="left" alt="JavaScript" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" />
+<img align="left" alt="Dart" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/dart/dart.png" />
+<img align="left" alt="Vue" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/vue/vue.png" />
+<img align="left" alt="Flutter" width="26px" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/flutter/flutter.png" />
 
-_Dashboard_
-![Image 2](https://i.imgur.com/VJ0gCEv.png)
+<br /> <br/>
 
-_Daftar Barang_
-![Image 3](https://i.imgur.com/3AaIzxz.png)
+<a href="https://github.com/ryo-ma/github-profile-trophy"><h2>🏆 Github Profile Trophy</h2></a>
+<a href="https://github.com/ryo-ma/github-profile-trophy">
+  <img width=800 src="https://github-profile-trophy.vercel.app/?username=shimozuki&column=8&theme=gruvbox&no-frame=true"/>
+</a>
 
-_Print_
-![Image 4](https://i.imgur.com/a7yj6Or.png)
-
-_Print Individual_
-![Image 5](https://i.imgur.com/Spjtxpv.png)
-
-_Daftar Bantuan Operasional Sekolah_
-![Image 6](https://i.imgur.com/zUruox1.png)
-
-_Daftar Ruangan_
-![Image 7](https://i.imgur.com/CrYTczu.png)
-
-_Daftar Pengguna_
-![Image 8](https://i.imgur.com/dF2tSet.png)
-
-_Pengaturan Profil_
-![Image 9](https://i.imgur.com/WbHIVPG.png)
-
-_Daftar Peran dan Hak Akses_
-![Image 10](https://i.imgur.com/5vlJQHL.png)
-
-### Langkah-langkah instalasi
-
--   Clone repository ini
-
-```bash
-$ git clone https://github.com/mrizkimaulidan/inven-bs.git
-```
-
--   Install seluruh packages yang dibutuhkan
-
-```bash
-$ composer install
-```
-
--   Siapkan database dan atur file .env sesuai dengan konfigurasi Anda
-
--   Masukan nama sekolah pada konfigurasi .env untuk menampilkan nama sekolah pada print barang. Berikan tanda kutip jika nama sekolah mengandung spasi
-
-Contoh:
-
-```
-NAMA_SEKOLAH="SD Negeri 001 Ciledug"
-```
-
--   Jika sudah, migrate seluruh migrasi dan seeding data
-
-```bash
-$ php artisan migrate --seed
-```
-
--   Jalankan local server
-
-```
-$ php artisan serve
-```
-
--   User default aplikasi untuk login
-
-Administrator
-
-```
-Email       : admin@mail.com
-Password    : secret
-```
-
-Staff TU (Tata Usaha)
-
-```
-Email       : stafftu@mail.com
-Password    : secret
-```
-
-### Dibuat dengan
-
--   [Laravel](https://laravel.com) - Web Framework
+[facebook]: https://www.facebook.com/bi.raja.13/
+[instagram]: https://www.instagram.com/r.obbiul.013/
+<div>
+  <img height="170" align="left" src="https://github-readme-stats.vercel.app/api?username=shimozuki&bg_color=30,5B5F97,FFC145&title_color=fff&text_color=fff" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shimozuki&bg_color=30,FF6B6C,833ab4&title_color=fff&text_color=fff&layout=compact" />
+</div>
+   
