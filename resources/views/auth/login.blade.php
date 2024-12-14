@@ -13,6 +13,14 @@
 	<!-- Template CSS -->
 	<link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
 	<link rel="stylesheet" href="{{ url('assets/css/components.css') }}">
+	<style>
+		@media (max-width: 768px) {
+			.hidden-mobile {
+				display: none !important;
+			}
+		}
+	</style>
+	
 </head>
 
 <body>
@@ -65,17 +73,18 @@
 					</div>
 				</div>
 				<div
-					class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 position-relative overlay-gradient-bottom"
-					data-background="../assets/img/unsplash/Rektorat_UTS.jpg">
-					<div class="absolute-bottom-left index-2">
-						<div class="text-light p-5 pb-2">
-							<div class="mb-5 pb-3">
-								<h1 class="mb-2 display-4 font-weight-bold" id="greetings"></h1>
-								<h5 class="font-weight-normal text-muted-transparent">Sumbawa, West Nusa Tenggara</h5>
-							</div>
-						</div>
-					</div>
-				</div>
+    class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 position-relative overlay-gradient-bottom hidden-mobile"
+    data-background="../assets/img/unsplash/Rektorat_UTS.jpg">
+    <div class="absolute-bottom-left index-2">
+        <div class="text-light p-5 pb-2">
+            <div class="mb-5 pb-3">
+                <h1 class="mb-2 display-4 font-weight-bold" id="greetings"></h1>
+                <h5 class="font-weight-normal text-muted-transparent">Sumbawa, West Nusa Tenggara</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
 			</div>
 		</section>
 	</div>

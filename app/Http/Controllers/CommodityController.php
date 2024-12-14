@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateCommodityRequest;
 use App\Imports\CommoditiesImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CommodityController extends Controller
 {
@@ -69,6 +70,34 @@ class CommodityController extends Controller
                 'commodity_materials'
             )
         );
+    }
+
+    public function getQrCode(Commodity $commodity)
+    {
+        try {
+            // Generate QR code dengan format SVG
+            $qrcode = QrCode::size(200)
+                ->format('svg')
+                ->style('square')
+                ->eye('square')
+                ->color(0, 0, 0)
+                ->backgroundColor(255, 255, 255)
+                ->margin(1)
+                ->generate($commodity->item_code);
+
+            // Pastikan QR code dikirim sebagai string SVG
+            return response()->json([
+                'success' => true,
+                'qrcode' => strval($qrcode),  // Konversi ke string
+                'name' => $commodity->name,
+                'code' => $commodity->item_code
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to generate QR Code: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

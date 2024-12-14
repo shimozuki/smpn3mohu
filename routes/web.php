@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/print/{id}', [CommodityController::class, 'generatePDFIndividually'])->name('print-individual');
         Route::post('/export', [CommodityController::class, 'export'])->name('export');
         Route::post('/import', [CommodityController::class, 'import'])->name('import');
+        Route::get('/{commodity}/qrcode', [CommodityController::class, 'getQrCode'])->name('barang.qrcode');
     });
 
     Route::resource('bantuan-dana-operasional', SchoolOperationalAssistanceController::class)

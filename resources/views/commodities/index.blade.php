@@ -203,6 +203,14 @@
 										</form>
 										@endcan
 
+										<a data-id="{{ $commodity->id }}" 
+											class="btn btn-sm btn-secondary text-white qr-modal mr-2"
+											data-toggle="modal" 
+											data-target="#qr_code_modal" 
+											title="Lihat QR Code">
+											 <i class="fas fa-fw fa-qrcode"></i>
+										 </a>
+
 										@can('hapus barang')
 										<form action="{{ route('barang.destroy', $commodity) }}" method="POST">
 											@csrf
@@ -227,6 +235,7 @@
 	@include('commodities.modal.create')
 	@include('commodities.modal.edit')
 	@include('commodities.modal.import')
+	@include('commodities.modal.qrcode')
 	@endpush
 
 	@push('js')
