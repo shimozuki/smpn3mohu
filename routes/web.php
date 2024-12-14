@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/export', [CommodityController::class, 'export'])->name('export');
         Route::post('/import', [CommodityController::class, 'import'])->name('import');
         Route::get('/{commodity}/qrcode', [CommodityController::class, 'getQrCode'])->name('barang.qrcode');
+        Route::get('/search/{code}', [CommodityController::class, 'searchByCode'])->name('barang.search');
     });
 
     Route::resource('bantuan-dana-operasional', SchoolOperationalAssistanceController::class)

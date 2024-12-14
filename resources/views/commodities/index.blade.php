@@ -24,7 +24,12 @@
 						</button>
 					</form>
 					@endcan
-
+					
+					<button type="button" class="btn btn-info mr-2" data-toggle="modal" data-target="#scan_qr_modal">
+						<i class="fas fa-fw fa-qrcode"></i>
+						Scan QR Code
+					</button>
+					
 					@can('tambah barang')
 					<button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#commodity_create_modal">
 						<i class="fas fa-fw fa-plus"></i>
@@ -236,6 +241,8 @@
 	@include('commodities.modal.edit')
 	@include('commodities.modal.import')
 	@include('commodities.modal.qrcode')
+	@include('commodities.modal.scanner')
+	@include('commodities.modal.scanshow')
 	@endpush
 
 	@push('js')

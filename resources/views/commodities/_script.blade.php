@@ -144,5 +144,86 @@ $('#download-qr').click(function() {
     
     img.src = url;
 });
+
+// QR Code Scanner
+let html5QrcodeScanner = null;
+
+$('#scan_qr_modal').on('shown.bs.modal', function () {
+    html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader", 
+        { 
+            fps: 10,
+            qrbox: {width: 250, height: 250},
+            aspectRatio: 1.0
+        }
+    );
+    
+    function onScanSuccess(decodedText, decodedResult) {
+        // Handle hasil scan
+        console.log(`Code scanned = ${decodedText}`, decodedResult);
+        
+        // Cari barang berdasarkan kode
+        $.ajax({
+            url: `/barang/search/${decodedText}`,
+            method: 'GET',
+            success: function(response) {
+                if (response.success) {
+                    // Tutup modal scanner
+                    $('#scan_qr_modal').modal('hide');
+                    
+                    // Set data ke modal scan show
+                    $('#scan_show_name').text(response.commodity.name);
+                    $('#scan_show_code').text(response.commodity.item_code);
+                    $('#scan_show_brand').text(response.commodity.brand || '-');
+                    $('#scan_show_material').text(response.commodity.material || '-');
+                    $('#scan_show_location').text(response.commodity.location || '-');
+                    $('#scan_show_purchase_year').text(response.commodity.purchase_year || '-');
+                    $('#scan_show_price').text(response.commodity.price ? `Rp ${response.commodity.price.toLocaleString()}` : '-');
+                    
+                    // Set kondisi barang
+                    let condition = '';
+                    switch(response.commodity.condition) {
+                        case 1:
+                            condition = '<span class="badge badge-success">Baik</span>';
+                            break;
+                        case 2:
+                            condition = '<span class="badge badge-warning">Kurang Baik</span>';
+                            break;
+                        case 3:
+                            condition = '<span class="badge badge-danger">Rusak Berat</span>';
+                            break;
+                        default:
+                            condition = '-';
+                    }
+                    $('#scan_show_condition').html(condition);
+                    
+                    // Tampilkan modal scan show
+                    $('#scan_show_modal').modal('show');
+                } else {
+                    alert('Barang tidak ditemukan!');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat mencari barang!');
+            }
+        });
+    }
+
+    function onScanFailure(error) {
+        // Handle kegagalan scan
+        console.warn(`Code scan error = ${error}`);
+    }
+
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+});
+
+// Bersihkan scanner saat modal ditutup
+$('#scan_qr_modal').on('hidden.bs.modal', function () {
+    if (html5QrcodeScanner) {
+        html5QrcodeScanner.clear();
+        html5QrcodeScanner = null;
+    }
+});
 	});
 </script>
