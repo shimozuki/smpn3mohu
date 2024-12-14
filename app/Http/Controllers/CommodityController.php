@@ -73,32 +73,29 @@ class CommodityController extends Controller
     }
 
     public function searchByCode($code)
-{
-    try {
-        // Debug
-        \Log::info('Searching for code: ' . $code);
-        
-        $commodity = Commodity::where('item_code', $code)->first();
-        
-        if ($commodity) {
+    {
+        try {
+
+            $commodity = Commodity::where('item_code', $code)->first();
+
+            if ($commodity) {
+                return response()->json([
+                    'success' => true,
+                    'commodity' => $commodity
+                ]);
+            }
+
             return response()->json([
-                'success' => true,
-                'commodity' => $commodity
+                'success' => false,
+                'message' => 'Barang tidak ditemukan'
             ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan'
+            ], 500);
         }
-        
-        return response()->json([
-            'success' => false,
-            'message' => 'Barang tidak ditemukan'
-        ]);
-    } catch (\Exception $e) {
-        \Log::error('Error searching commodity: ' . $e->getMessage());
-        return response()->json([
-            'success' => false,
-            'message' => 'Terjadi kesalahan'
-        ], 500);
     }
-}
 
     public function getQrCode(Commodity $commodity)
     {

@@ -4,6 +4,11 @@
 
 	<div class="card">
 		<div class="card-body">
+			@php
+			$userRole = auth()->user()->roles->pluck('name')->first();
+			$allowedRoles = ['Administrator', 'Staff TU'];
+			@endphp
+			@if(in_array($userRole, $allowedRoles))
 			@include('utilities.alert')
 			<div class="d-flex justify-content-end mb-3">
 				<div class="btn-group">
@@ -48,7 +53,6 @@
 					@endcan
 				</div>
 			</div>
-
 			<x-filter>
 				<div class="row">
 					<div class="col-md-6">
@@ -137,6 +141,7 @@
 
 				<x-slot name="resetFilterURL">{{ route('barang.index') }}</x-slot>
 			</x-filter>
+			
 
 			<div class="row">
 				<div class="col-lg-12">
@@ -231,7 +236,16 @@
 						</tbody>
 					</x-datatable>
 				</div>
+				
 			</div>
+			@else
+			<center>
+				<button type="button" class="btn btn-info mr-2" data-toggle="modal" data-target="#scan_qr_modal">
+					<i class="fas fa-fw fa-qrcode"></i>
+					Scan QR Code
+				</button>
+			</center>
+			@endif
 		</div>
 	</div>
 
