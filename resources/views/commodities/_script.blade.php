@@ -159,7 +159,6 @@ $('#scan_qr_modal').on('shown.bs.modal', function () {
     );
     
     function onScanSuccess(decodedText, decodedResult) {
-        // Handle hasil scan
         console.log(`Code scanned = ${decodedText}`, decodedResult);
         
         // Cari barang berdasarkan kode
@@ -172,40 +171,49 @@ $('#scan_qr_modal').on('shown.bs.modal', function () {
                     $('#scan_qr_modal').modal('hide');
                     
                     // Set data ke modal scan show
-                    $('#scan_show_name').text(response.commodity.name);
-                    $('#scan_show_code').text(response.commodity.item_code);
-                    $('#scan_show_brand').text(response.commodity.brand || '-');
-                    $('#scan_show_material').text(response.commodity.material || '-');
-                    $('#scan_show_location').text(response.commodity.location || '-');
-                    $('#scan_show_purchase_year').text(response.commodity.purchase_year || '-');
-                    $('#scan_show_price').text(response.commodity.price ? `Rp ${response.commodity.price.toLocaleString()}` : '-');
+                    $('#commodity_id').val(response.commodity.id);
+                    $('#scan_show_code').val(response.commodity.item_code);
+                    $('#scan_show_name').val(response.commodity.name);
+                    $('#scan_show_brand').val(response.commodity.brand);
+                    $('#scan_show_material').val(response.commodity.material);
+                    $('#scan_show_location').val(response.commodity.commodity_location_id);
+                    $('#scan_show_purchase_year').val(response.commodity.year_of_purchase);
+                    $('#scan_show_price').val(response.commodity.price);
                     
                     // Set kondisi barang
                     let condition = '';
                     switch(response.commodity.condition) {
                         case 1:
-                            condition = '<span class="badge badge-success">Baik</span>';
+                            condition = 'Baik';
                             break;
                         case 2:
-                            condition = '<span class="badge badge-warning">Kurang Baik</span>';
+                            condition = 'Kurang Baik';
                             break;
                         case 3:
-                            condition = '<span class="badge badge-danger">Rusak Berat</span>';
+                            condition = 'Rusak Berat';
                             break;
                         default:
                             condition = '-';
                     }
-                    $('#scan_show_condition').html(condition);
+                    $('#scan_show_condition').val(condition);
                     
                     // Tampilkan modal scan show
                     $('#scan_show_modal').modal('show');
                 } else {
-                    alert('Barang tidak ditemukan!');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response.message || 'Barang tidak ditemukan!'
+                    });
                 }
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
-                alert('Terjadi kesalahan saat mencari barang!');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Terjadi kesalahan saat mencari barang!'
+                });
             }
         });
     }
@@ -225,5 +233,6 @@ $('#scan_qr_modal').on('hidden.bs.modal', function () {
         html5QrcodeScanner = null;
     }
 });
+
 	});
 </script>

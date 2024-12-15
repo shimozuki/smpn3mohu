@@ -14,6 +14,7 @@ use App\Imports\CommoditiesImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\CommodityLoan;
 
 class CommodityController extends Controller
 {
@@ -25,7 +26,7 @@ class CommodityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $query = Commodity::query();
         $query->when(request()->filled('condition'), function ($q) {
@@ -59,6 +60,11 @@ class CommodityController extends Controller
         $school_operational_assistances = SchoolOperationalAssistance::orderBy('name', 'ASC')->get();
         $commodity_locations = CommodityLocation::orderBy('name', 'ASC')->get();
 
+        $commodity_loans = CommodityLoan::with('commodity')
+            ->where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view(
             'commodities.index',
             compact(
@@ -67,38 +73,37 @@ class CommodityController extends Controller
                 'commodity_locations',
                 'year_of_purchases',
                 'commodity_brands',
-                'commodity_materials'
+                'commodity_materials',
+                'commodity_loans'
             )
         );
     }
 
     public function searchByCode($code)
-{
-    try {
-        // Debug
-        \Log::info('Searching for code: ' . $code);
-        
-        $commodity = Commodity::where('item_code', $code)->first();
-        
-        if ($commodity) {
+    {
+        try {
+            $commodity = Commodity::with(['commodity_location'])
+                ->where('item_code', $code)
+                ->first();
+
+            if ($commodity) {
+                return response()->json([
+                    'success' => true,
+                    'commodity' => $commodity
+                ]);
+            }
+
             return response()->json([
-                'success' => true,
-                'commodity' => $commodity
+                'success' => false,
+                'message' => 'Barang tidak ditemukan'
             ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan'
+            ], 500);
         }
-        
-        return response()->json([
-            'success' => false,
-            'message' => 'Barang tidak ditemukan'
-        ]);
-    } catch (\Exception $e) {
-        \Log::error('Error searching commodity: ' . $e->getMessage());
-        return response()->json([
-            'success' => false,
-            'message' => 'Terjadi kesalahan'
-        ], 500);
     }
-}
 
     public function getQrCode(Commodity $commodity)
     {
