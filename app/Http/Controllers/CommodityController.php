@@ -14,6 +14,7 @@ use App\Imports\CommoditiesImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\CommodityLoan;
 
 class CommodityController extends Controller
 {
@@ -25,7 +26,7 @@ class CommodityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $query = Commodity::query();
         $query->when(request()->filled('condition'), function ($q) {
@@ -59,6 +60,11 @@ class CommodityController extends Controller
         $school_operational_assistances = SchoolOperationalAssistance::orderBy('name', 'ASC')->get();
         $commodity_locations = CommodityLocation::orderBy('name', 'ASC')->get();
 
+        $commodity_loans = CommodityLoan::with('commodity')
+            ->where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view(
             'commodities.index',
             compact(
@@ -67,7 +73,8 @@ class CommodityController extends Controller
                 'commodity_locations',
                 'year_of_purchases',
                 'commodity_brands',
-                'commodity_materials'
+                'commodity_materials',
+                'commodity_loans'
             )
         );
     }
@@ -75,8 +82,9 @@ class CommodityController extends Controller
     public function searchByCode($code)
     {
         try {
-
-            $commodity = Commodity::where('item_code', $code)->first();
+            $commodity = Commodity::with(['commodity_location'])
+                ->where('item_code', $code)
+                ->first();
 
             if ($commodity) {
                 return response()->json([

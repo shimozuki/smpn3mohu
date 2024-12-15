@@ -10,6 +10,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SchoolOperationalAssistanceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommodityLoanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +59,7 @@ Route::middleware('auth')->group(function () {
         ->parameter('pengguna', 'user');
 
     Route::resource('peran-dan-hak-akses', RoleController::class)->parameter('peran-dan-hak-akses', 'role');
+    Route::post('/commodity-loans', [CommodityLoanController::class, 'store'])->name('commodity-loans.store');
+    Route::post('/commodity-loans/{id}/approve-loan', [CommodityLoanController::class, 'approveLoan'])->name('commodity-loans.approve-loan');
+    Route::post('/commodity-loans/{id}/confirm-return', [CommodityLoanController::class, 'confirmReturn'])->name('commodity-loans.confirm-return');
 });
