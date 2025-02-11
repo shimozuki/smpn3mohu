@@ -30,7 +30,13 @@ class StoreCommodityRequest extends FormRequest
             'name' => 'required|string|min:3|max:255',
             'brand' => 'required|string|min:3|max:255',
             'material' => 'required|string|min:3|max:255',
-            'year_of_purchase' => 'required|numeric|digits:4',
+            'year_of_purchase' => [
+                'required',
+                'integer',
+                'min:1900',
+                'digits:4',
+                'max:' . date('Y')
+            ],
             'condition' => 'required|in:1,2,3',
             'quantity' => 'required|numeric|digits_between:1,10',
             'price' => 'required|numeric|digits_between:1,10',
@@ -78,6 +84,8 @@ class StoreCommodityRequest extends FormRequest
             'year_of_purchase.required' => 'Kolom tahun pembelian wajib diisi!',
             'year_of_purchase.numeric' => 'Kolom tahun pembelian harus berupa angka!',
             'year_of_purchase.digits' => 'Kolom tahun pembelian harus memiliki :digits digit!',
+            'year_of_purchase.min' => 'Tahun pembelian tidak boleh lebih kecil dari 1900.',
+            'year_of_purchase.max' => 'Tahun pembelian tidak boleh lebih besar dari tahun saat ini.',
 
             'condition.required' => 'Kolom kondisi wajib diisi!',
             'condition.in' => 'Kolom kondisi yang dipilih tidak valid!',

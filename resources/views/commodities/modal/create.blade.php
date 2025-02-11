@@ -143,54 +143,34 @@
 					<hr>
 
 					<div class="row">
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label for="quantity">Kuantitas</label>
-								<input type="number" class="form-control @error('quantity', 'store') is-invalid @enderror"
-									name="quantity" id="quantity" value="{{ old('quantity') }}" placeholder="Masukan kuantitas barang..">
-								@error('quantity', 'store')
-								<div class="d-block invalid-feedback">
-									{{ $message }}
+						<div class="row">
+						<!-- <div class="col-lg-4">
+								<div class="form-group">
+									<label for="pricePerItem">Harga Satuan</label>
+									<input type="number" class="form-control" name="quantity" id="quantity1" placeholder="Masukan harga satuan.." oninput="calculateTotalPrice()">
 								</div>
-								@enderror
-							</div>
-						</div>
-						<div class="col-lg-4 col-6">
-							<div class="form-group">
-								<label for="price">Harga</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-addon1">Rp.</span>
-									</div>
-									<input type="number" class="form-control @error('price', 'store') is-invalid @enderror" name="price"
-										id="price" value="{{ old('price') }}" placeholder="Masukan harga barang..">
-									@error('price', 'store')
-									<div class="d-block invalid-feedback">
-										{{ $message }}
-									</div>
-									@enderror
+							</div> -->
+							<div class="col-lg-4">
+								<div class="form-group">
+									<label for="quantity">Kuantitas</label>
+									<input type="number" class="form-control" name="quantity" id="quantity1" placeholder="Masukan kuantitas barang.." oninput="calculateTotalPrice()">
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4 col-6">
-							<div class="form-group">
-								<label for="price_per_item">Harga Satuan</label>
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-addon1">Rp.</span>
-									</div>
-									<input type="number" class="form-control @error('price_per_item', 'store') is-invalid @enderror"
-										name="price_per_item" id="price_per_item" value="{{ old('price_per_item') }}"
-										placeholder="Masukan harga satuan barang..">
-									@error('price_per_item', 'store')
-									<div class="d-block invalid-feedback">
-										{{ $message }}
-									</div>
-									@enderror
+							<div class="col-lg-4">
+								<div class="form-group">
+									<label for="pricePerItem">Harga Satuan</label>
+									<input type="number" class="form-control" name="pricePerItem" id="pricePerItem1" placeholder="Masukan harga satuan.." oninput="calculateTotalPrice()">
+								</div>
+							</div>
+							<div class="col-lg-4">
+								<div class="form-group">
+									<label for="totalPrice">Harga Total</label>
+									<input type="text" class="form-control" name="totalPrice" id="totalPrice" placeholder="Harga total barang.." disabled>
 								</div>
 							</div>
 						</div>
 					</div>
+
 
 					<div class="row">
 						<div class="col-12">
@@ -216,3 +196,17 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    function calculateTotalPrice() {
+        var quantity = document.getElementById('quantity1');
+        var pricePerItem = document.getElementById('pricePerItem1');
+
+        console.log("Quantity:", quantity.value);
+        console.log("Price per item:", pricePerItem.value);
+
+        var totalPrice = quantity.value * pricePerItem.value;
+
+        document.getElementById('totalPrice').value = totalPrice.toFixed(2);
+    }
+</script>
